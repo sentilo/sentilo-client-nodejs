@@ -50,7 +50,7 @@ console.log(sentilo.createSensor(newSensor));
 
 const sensorObservation = 'TEST';
 
-const response = sentilo.publishObservations(sensorObservation, newSensor);
-
+console.log('Publishing sensor observation to sensor ', newSensor.sensor);
+sentilo.publishObservations(sensorObservation, newSensor);
 
 
