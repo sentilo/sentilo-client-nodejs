@@ -28,7 +28,6 @@
  */
 const logger = require('./utils/SentiloLogs');
 const utils = require('./utils/SentiloUtils');
-const responseUtil = require('./utils/SentiloResponse');
 
 const catalog = require('./CatalogServiceOperations');
 const data = require('./DataServiceOperations');
@@ -123,7 +122,7 @@ module.exports = {
         observationsInputMessage = utils.mergeOptions(observationsInputMessage, options);
 
         const response = data.sendObservations(observationsInputMessage);
-        if (responseUtil.isNOK(response)) {
+        if (utils.isResponseOK(response)) {
             logger.error('Error publishing observations');
             logger.error(response);
             return false;

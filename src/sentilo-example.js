@@ -48,5 +48,9 @@ const newSensor = {
 console.log('Creating sensor', newSensor);
 console.log(sentilo.createSensor(newSensor));
 
+const sensorObservation = 'TEST';
+
+const response = sentilo.publishObservations(sensorObservation, newSensor);
+
 
 

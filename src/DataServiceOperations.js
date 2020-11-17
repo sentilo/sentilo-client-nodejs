@@ -99,7 +99,7 @@ module.exports = {
             try {
                 var response = rest.put(requestOptions);
                 logger.debug("Observations has been sent");
-                if (response.body && response.body.length > 0) {
+                if (response.body) {
                     return JSON.parse(response.body.toString());
                 }
             } catch (e) {

@@ -57,5 +57,12 @@ module.exports = {
             return new Array(width + (/\./.test(str) ? 2 : 1)).join(' ') + str;
         }
         return str + ""; // always return a string
+    },
+    isResponseOK: function (response) {
+        return (response && response.code && response.code === 200);
+    },
+
+    isResponseNOK: function (response) {
+        return (response && response.code && response.code !== 200);
     }
 };
