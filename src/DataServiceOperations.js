@@ -52,8 +52,7 @@ module.exports = {
     /**
      * Retrieve a list of the last observations published on a sensor
      * 
-     * @param inputMessage
-     *            A map opbject where you can specify params for silter the
+     * @param inputMessage A map opbject where you can specify params for silter the
      *            query (it must be in a field named 'qs')
      * @returns A JSON object with the observations list
      */
@@ -90,7 +89,7 @@ module.exports = {
         var requestOptions = utils.mergeOptions(dataServiceOptions, inputMessage);
         requestOptions.path += '/' + requestOptions.provider + '/' + requestOptions.sensor;
 
-        // The input message must contains a correct observatiosn struture
+        // The input message must contains a correct observation struture
         // You can see an entire example in the Sentilo API Doc:
         // https://sentilo.readthedocs.io/en/latest/api_docs/general_model.html#json-format
         if (inputMessage.body && inputMessage.body.observations && inputMessage.body.observations.length > 0) {
