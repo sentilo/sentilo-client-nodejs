@@ -28,6 +28,7 @@
  */
 const logger = require('./utils/SentiloLogs');
 const utils = require('./utils/SentiloUtils');
+const responseUtil = require('./utils/SentiloResponse');
 
 const catalog = require('./CatalogServiceOperations');
 const data = require('./DataServiceOperations');
@@ -111,7 +112,7 @@ module.exports = {
      * Publish observations
      */
     publishObservations : function(value, options) {
-        var observationsInputMessage = {
+        let observationsInputMessage = {
             body : {
                 observations : [ {
                     value : value
@@ -121,14 +122,13 @@ module.exports = {
 
         observationsInputMessage = utils.mergeOptions(observationsInputMessage, options);
 
-        var response = data.sendObservations(observationsInputMessage);
-        if (response && response.code && response.code === 400) {
+        const response = data.sendObservations(observationsInputMessage);
+        if (responseUtil.isNOK(response)) {
             logger.error('Error publishing observations');
             logger.error(response);
             return false;
-        } else {
-            return true;
         }
+        return true;
     },
 
     /**

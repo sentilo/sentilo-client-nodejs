@@ -42,5 +42,13 @@ module.exports = {
             message : message
         };
         return message;
+    },
+
+    isOK: function (response) {
+        return (response && response.code && response.code === 200);
+    },
+
+    isNOK: function (response) {
+        return (response && response.code && response.code !== 400);
     }
 };
