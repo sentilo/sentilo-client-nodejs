@@ -41,8 +41,7 @@ module.exports = {
     /**
      * Initializes the Data Service Operations Module
      * 
-     * @param serviceOptions
-     *            A options object with new service configuration
+     * @param initOptions Options object with new service configuration
      */
     init : function(initOptions) {
         var serviceConfigOptions = servicesConfig.getServiceConfigOptions();
@@ -82,8 +81,7 @@ module.exports = {
      * see this url for more information:
      * http://www.sentilo.io/xwiki/bin/view/ApiDocs.Services.Data/PublishSensorData
      * 
-     * @param inputMessage
-     *            A map object with a list of observations
+     * @param inputMessage A map object with a list of observations
      * @returns A JSON object only if there is an error
      */
     sendObservations : function(inputMessage) {
@@ -94,7 +92,7 @@ module.exports = {
 
         // The input message must contains a correct observatiosn struture
         // You can see an entire example in the Sentilo API Doc:
-        // http://www.sentilo.io/xwiki/bin/view/ApiDocs.Services.Data/RetrieveSensorData
+        // https://sentilo.readthedocs.io/en/latest/api_docs/general_model.html#json-format
         if (inputMessage.body && inputMessage.body.observations && inputMessage.body.observations.length > 0) {
             if (typeof inputMessage.body === 'object') {
                 requestOptions.body = JSON.stringify(inputMessage.body);
