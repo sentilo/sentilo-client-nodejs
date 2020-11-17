@@ -66,6 +66,7 @@ module.exports = {
         if (response && response.providers) {
             const provider = response.providers.find((provider) => provider.provider === providerSearch);
             if (!provider) {
+                logger.error('Provider with name ' + providerSearch + ' not found, exiting');
                 return false;
             }
             return !!provider.sensors.find(sensor => sensor.sensor === sensorSearch);
@@ -98,13 +99,12 @@ module.exports = {
         logger.debug(inputMessage);
 
         const response = catalog.registerSensors(inputMessage);
-        if (response && response.code && response.code === 400) {
+        if (!response || !response.statusCode || response.statusCode !== 200) {
             logger.error('Error registering the sensors');
             logger.error(response);
             return false;
-        } else {
-            return true;
         }
+        return true;
     },
 
     /**

@@ -103,8 +103,8 @@ module.exports = {
             try {
                 var response = rest.post(requestOptions);
                 logger.debug("Sensors registered");
-                if (response.body && response.body.length > 0) {
-                    return JSON.parse(response.body.toString());
+                if (response.statusCode === 200) {
+                    return response;
                 }
             } catch (e) {
                 logger.error('Error retrieving sensors: ' + e.message);
@@ -114,7 +114,6 @@ module.exports = {
             logger.debug('There isn\'t any sensor to register');
         }
 
-        return null;
     },
 
     /**

@@ -40,13 +40,13 @@ console.log(sentilo.existsSensorInCatalog(existingSensor));
 const newSensor = {
     sensor : 'TestNewSensor',
     description : 'TestNewSensorDescription',
-    type : sensorType,
-    dataType : sensorDataType,
-    unit : sensorUnit,
-    component : component,
-    componentType : componentType,
-    location : sensorLocation
+    sensorType : 'anemometer',
+    sensorDataType : 'JSON',
+    component : 'TestGenericSensor',
 }
+
+console.log('Creating sensor', newSensor);
+console.log(sentilo.createSensor(newSensor));
 
 
 
