@@ -27,6 +27,7 @@ You will need to have installed **Node.js** and **NPM** in your system in order 
      |----- /package.json
      |----- /README.ME
      '----- /sentilo.js
+     '----- /sentilo-example.js
 </pre>
 - In a bash command line, run:
 <pre>$ npm update</pre>
@@ -73,9 +74,9 @@ Provide necessary information about your Sentilo instance:
 * 'YOUR-SENTILO-INSTANCE-IDENTITY-KEY' : the same of above
 * 'YOUR-SENTILO-INSTANCE-PROVIDER-IDENTITY-KEY' : your provider's identity key
 
-Note that you can leave these parameters without changing and override them with the initialization options in your own code:
+Note that you can leave these parameters without changing and override them with the initialization options in your own code, or you can use the example **sentilo-example.js**:
 <pre>
-//Overriden services options...
+// Overridden services options...
 var samplesOptions = {
 	host : 'YOUR-SENTILO-INSTANCE-HOST-IP',
 	port : 'YOUR-SENTILO-INSTANCE-HOST-PORT',
