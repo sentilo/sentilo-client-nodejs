@@ -31,18 +31,18 @@ const sentilo = require('./sentilo');
 sentilo.init();
 
 const existingSensor = {
-    provider : 'testApp_provider',
-    sensor : 'TestSensor'
+    provider: 'testApp_provider',
+    sensor: 'TestSensor'
 };
 
 console.log(sentilo.existsSensorInCatalog(existingSensor));
 
 const newSensor = {
-    sensor : 'TestNewSensor',
-    description : 'TestNewSensorDescription',
-    sensorType : 'anemometer',
-    sensorDataType : 'JSON',
-    component : 'TestGenericSensor',
+    sensor: 'TestNewSensor',
+    description: 'TestNewSensorDescription',
+    sensorType: 'anemometer',
+    sensorDataType: 'JSON',
+    component: 'TestGenericSensor',
 }
 
 console.log('Creating sensor', newSensor);
@@ -52,5 +52,20 @@ const sensorObservation = 'TEST';
 
 console.log('Publishing sensor observation to sensor ', newSensor.sensor);
 sentilo.publishObservations(sensorObservation, newSensor);
+
+const newAlert = {
+    alerts: [
+        {
+            id: 'TEST_ALERT_001',
+            name: 'TEST_ALERT_001',
+            description: 'External test alert 001',
+            type: 'EXTERNAL'
+        }
+    ]
+}
+console.log('Register new alert', newAlert);
+sentilo.createAlerts(newAlert);
+
+
 
 

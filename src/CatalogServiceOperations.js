@@ -173,7 +173,7 @@ module.exports = {
     registerAlerts : function(inputMessage) {
         logger.debug('Registering alerts');
 
-        var requestOptions = utils.mergeOptions(catalogServiceOptions, inputMessage);
+        let requestOptions = utils.mergeOptions(catalogServiceOptions, inputMessage);
 
         // The input message must contains a correct alerts struture
         // You can see an entire example in the Sentilo API Doc:
@@ -188,7 +188,7 @@ module.exports = {
             requestOptions.path += '/alert/' + requestOptions.provider;
 
             try {
-                var response = rest.post(requestOptions);
+                const response = rest.post(requestOptions);
                 logger.debug("Alerts registered");
                 if (response.body && response.body.length > 0) {
                     return JSON.parse(response.body.toString());
