@@ -181,7 +181,7 @@ module.exports = {
         };
 
         const response = subscribe.subscribe(subscriptionInputMessage);
-        if (response && response.code && response.code === 400) {
+        if (utils.isResponseNOK(response)) {
             logger.error('Error subscribing order');
             logger.error(response);
             return false;
@@ -194,14 +194,14 @@ module.exports = {
      * Subscribe to all sensors orders from a provider
      */
     subscribeOrderToAll : function(inputMessage) {
-        var subscriptionInputMessage = {
+        const subscriptionInputMessage = {
             body : {
                 endpoint : inputMessage.endpoint
             }
         };
 
-        var response = subscribe.subscribeToAll(subscriptionInputMessage);
-        if (response && response.code && response.code === 400) {
+        const response = subscribe.subscribeToAll(subscriptionInputMessage);
+        if (utils.isResponseNOK(response)) {
             logger.error('Error subscribing order');
             logger.error(response);
             return false;

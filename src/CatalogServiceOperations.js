@@ -166,9 +166,8 @@ module.exports = {
      * information:
      * http://www.sentilo.io/xwiki/bin/view/APIDocs.Services.Alert/CreateAlerts
      * 
-     * @param inputMessage
-     *            A properties object that describes the request options, with
-     *            the list of alerts
+     * @param inputMessage A properties object that describes the request options, with the list of alerts
+     *
      */
     registerAlerts : function(inputMessage) {
         logger.debug('Registering alerts');

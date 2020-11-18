@@ -54,7 +54,7 @@ console.log(sentilo.createSensor(newSensor));
 const sensorObservation = 'TEST';
 
 console.log('Publishing sensor observation to sensor ', newSensor.sensor);
-sentilo.publishObservations(sensorObservation, newSensor);
+console.log(sentilo.publishObservations(sensorObservation, newSensor));
 
 // Creates a new alert
 const newAlert = {
@@ -68,19 +68,24 @@ const newAlert = {
     ]
 }
 console.log('Register new alert', newAlert);
-sentilo.createAlerts(newAlert);
+console.log(sentilo.createAlerts(newAlert));
 
 // Publish new alarm associated to the alarm that is registered later
 const message = {message: "This is a test alarm over the TEST_ALERT_001"};
+let alarmId = newAlert.alerts[0].id;
 
-sentilo.publishAlarm(newAlert.alerts[0].id, message);
+console.log('Register a new alarm with the ID', alarmId);
+console.log(sentilo.publishAlarm(alarmId, message));
 
 // Example of how to subscribe to a sensor order
 const endpoint = {endpoint:"http://my-test-server/sentilo/sensor/data/endpoint"}
 
-sentilo.subscribeOrder(endpoint);
+console.log('Registering a subscription for the endpoint', endpoint.endpoint);
+console.log(sentilo.subscribeOrder(endpoint));
 
-
+// Example of how to subscribe to all orders
+console.log('Subscribing to all orders');
+console.log(sentilo.subscribeOrderToAll(endpoint));
 
 
 
