@@ -154,14 +154,14 @@ module.exports = {
      * Publish an alarm
      */
     publishAlarm : function(alert, inputMessage) {
-        var alarmInputMessage = {
+        const alarmInputMessage = {
             body : {
                 message : inputMessage.message
             }
         };
 
-        var response = alarm.publish(alert, alarmInputMessage);
-        if (response && response.code && response.code === 400) {
+        const response = alarm.publish(alert, alarmInputMessage);
+        if (utils.isResponseNOK(response)) {
             logger.error('Error publishing alarm');
             logger.error(response);
             return false;

@@ -49,7 +49,7 @@ module.exports = {
     publish : function(alert, inputMessage) {
         logger.debug('Publishing alarm');
 
-        var requestOptions = utils.mergeOptions(alarmServiceOptions, inputMessage);
+        const requestOptions = utils.mergeOptions(alarmServiceOptions, inputMessage);
 
         if (!alert) {
             logger.error('The alert id may be informed for publish an alarm to it');
@@ -66,11 +66,7 @@ module.exports = {
             }
             requestOptions.path += '/' + alert;
             try {
-                var response = rest.put(requestOptions);
-                logger.debug("Alarm published");
-                if (response.body && response.body.length > 0) {
-                    return JSON.parse(response.body.toString());
-                }
+                return rest.put(requestOptions);
             } catch (e) {
                 logger.error('Error publishing alarm: ' + e.message);
                 return respMsg.error(e.code, e.message);

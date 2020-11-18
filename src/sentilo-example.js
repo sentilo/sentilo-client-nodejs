@@ -27,9 +27,10 @@
  * https://www.gnu.org/licenses/lgpl.txt
  */
 const sentilo = require('./sentilo');
-
+// Initialize sentilo
 sentilo.init();
 
+// Checks if the sensor exists
 const existingSensor = {
     provider: 'testApp_provider',
     sensor: 'TestSensor'
@@ -37,6 +38,7 @@ const existingSensor = {
 
 console.log(sentilo.existsSensorInCatalog(existingSensor));
 
+// Creates a new sensor
 const newSensor = {
     sensor: 'TestNewSensor',
     description: 'TestNewSensorDescription',
@@ -48,11 +50,13 @@ const newSensor = {
 console.log('Creating sensor', newSensor);
 console.log(sentilo.createSensor(newSensor));
 
+// Send observation to the sensor
 const sensorObservation = 'TEST';
 
 console.log('Publishing sensor observation to sensor ', newSensor.sensor);
 sentilo.publishObservations(sensorObservation, newSensor);
 
+// Creates a new alert
 const newAlert = {
     alerts: [
         {
@@ -65,6 +69,11 @@ const newAlert = {
 }
 console.log('Register new alert', newAlert);
 sentilo.createAlerts(newAlert);
+
+// Publish new alarm associated to the alarm that is registered later
+const message = {message: "This is a test alarm over the TEST_ALERT_001"};
+
+sentilo.publishAlarm(newAlert.alerts[0].id, message);
 
 
 
