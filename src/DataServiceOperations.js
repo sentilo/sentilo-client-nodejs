@@ -97,11 +97,7 @@ module.exports = {
                 requestOptions.body = JSON.stringify(inputMessage.body);
             }
             try {
-                var response = rest.put(requestOptions);
-                logger.debug("Observations has been sent");
-                if (response.body) {
-                    return JSON.parse(response.body.toString());
-                }
+                return rest.put(requestOptions);
             } catch (e) {
                 logger.error('Error sending observations: ' + e.message, e.stack);
                 return respMsg.error(e.code, e.message);
