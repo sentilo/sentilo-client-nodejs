@@ -134,13 +134,13 @@ module.exports = {
      * Create an alert list
      */
     createAlerts : function(alertsList) {
-        var alertsImputMessage = {
+        var alertsInputMessage = {
             body : {
                 alerts : alertsList.alerts
             }
         };
 
-        var response = catalog.registerAlerts(alertsImputMessage);
+        var response = catalog.registerAlerts(alertsInputMessage);
         if (response && response.code && response.code === 400) {
             logger.error('Error registering alerts');
             logger.error(response);
