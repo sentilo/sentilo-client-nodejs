@@ -75,6 +75,14 @@ const message = {message: "This is a test alarm over the TEST_ALERT_001"};
 
 sentilo.publishAlarm(newAlert.alerts[0].id, message);
 
+// Example of how to subscribe to a sensor order
+const endpoint = {endpoint:"http://my-test-server/sentilo/sensor/data/endpoint"}
+
+sentilo.subscribeOrder(endpoint);
+
+
+
+
 
 
 

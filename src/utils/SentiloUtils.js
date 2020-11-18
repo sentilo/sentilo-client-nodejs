@@ -58,11 +58,8 @@ module.exports = {
         }
         return str + ""; // always return a string
     },
-    isResponseOK: function (response) {
-        return (response && response.code && response.code === 200);
-    },
 
     isResponseNOK: function (response) {
-        return (response && response.code && response.code !== 200);
+        return (response && response.code && response.code === 400);
     }
 };

@@ -99,7 +99,7 @@ module.exports = {
         logger.debug(inputMessage);
 
         const response = catalog.registerSensors(inputMessage);
-        if (!response || !response.statusCode || response.statusCode !== 200) {
+        if (utils.isResponseNOK(response)) {
             logger.error('Error registering the sensors');
             logger.error(response);
             return false;
@@ -122,7 +122,7 @@ module.exports = {
         observationsInputMessage = utils.mergeOptions(observationsInputMessage, options);
 
         const response = data.sendObservations(observationsInputMessage);
-        if (utils.isResponseOK(response)) {
+        if (utils.isResponseNOK(response)) {
             logger.error('Error publishing observations');
             logger.error(response);
             return false;
@@ -174,13 +174,13 @@ module.exports = {
      * Subscribe to a sensor order
      */
     subscribeOrder : function(inputMessage) {
-        var subscriptionInputMessage = {
+        const subscriptionInputMessage = {
             body : {
                 endpoint : inputMessage.endpoint
             }
         };
 
-        var response = subscribe.subscribe(subscriptionInputMessage);
+        const response = subscribe.subscribe(subscriptionInputMessage);
         if (response && response.code && response.code === 400) {
             logger.error('Error subscribing order');
             logger.error(response);
