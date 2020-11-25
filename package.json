@@ -4,10 +4,13 @@
 	"description": "Sentilo Nodejs client library",
 	"author": "Sentilo Team (http://www.sentilo.io)",
 	"license": "ISC",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/sentilo/sentilo-client-nodejs.git"
+	},
+	"main": "src/sentilo.js",
 	"dependencies": 
 	{
-		"restify": "*",
-		"sync-request": "*",
-		"onoff": "*"
+		"sync-request": "*"
 	}
 }
