@@ -29,33 +29,30 @@
 
 // We need to do synchronous calls to server, so we need to use 'sync-request' library
 // that you can find in this url: https://www.npmjs.com/package/sync-request
-var request = require('sync-request');
+const request = require('sync-request');
 
 module.exports = {
 
     get : function(requestOptions) {
         if (requestOptions) {
-            var url = 'http://' + requestOptions.host + ':' + requestOptions.port + requestOptions.path;
-            var res = request('GET', url, requestOptions);
-            return res;
+            const url = 'http://' + requestOptions.host + ':' + requestOptions.port + requestOptions.path;
+            return request('GET', url, requestOptions);
         }
         return null;
     },
 
     post : function(requestOptions) {
         if (requestOptions) {
-            var url = 'http://' + requestOptions.host + ':' + requestOptions.port + requestOptions.path;
-            var res = request('POST', url, requestOptions);
-            return res;
+            const url = 'http://' + requestOptions.host + ':' + requestOptions.port + requestOptions.path;
+            return request('POST', url, requestOptions);
         }
         return null;
     },
 
     put : function(requestOptions) {
         if (requestOptions) {
-            var url = 'http://' + requestOptions.host + ':' + requestOptions.port + requestOptions.path;
-            var res = request('PUT', url, requestOptions);
-            return res;
+            const url = 'http://' + requestOptions.host + ':' + requestOptions.port + requestOptions.path;
+            return request('PUT', url, requestOptions);
         }
         return null;
     }
