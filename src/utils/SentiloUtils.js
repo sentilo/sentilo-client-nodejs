@@ -28,6 +28,7 @@
  */
 module.exports = {
 
+    // the second object can overwrite attributes of the first object
     mergeOptions : function(obj1, obj2) {
         var obj3 = {};
         if (obj1) {
@@ -57,5 +58,9 @@ module.exports = {
             return new Array(width + (/\./.test(str) ? 2 : 1)).join(' ') + str;
         }
         return str + ""; // always return a string
+    },
+
+    isResponseNOK: function (response) {
+        return (response && response.code && response.code === 400);
     }
 };

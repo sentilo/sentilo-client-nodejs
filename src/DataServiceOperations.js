@@ -41,8 +41,7 @@ module.exports = {
     /**
      * Initializes the Data Service Operations Module
      * 
-     * @param serviceOptions
-     *            A options object with new service configuration
+     * @param initOptions Options object with new service configuration
      */
     init : function(initOptions) {
         var serviceConfigOptions = servicesConfig.getServiceConfigOptions();
@@ -53,8 +52,7 @@ module.exports = {
     /**
      * Retrieve a list of the last observations published on a sensor
      * 
-     * @param inputMessage
-     *            A map opbject where you can specify params for silter the
+     * @param inputMessage A map opbject where you can specify params for silter the
      *            query (it must be in a field named 'qs')
      * @returns A JSON object with the observations list
      */
@@ -69,7 +67,7 @@ module.exports = {
                 return JSON.parse(response.body.toString());
             }
         } catch (e) {
-            logger.error('Error retrieving observations: ' + e.message, e.stack);
+            logger.error('Error retrieving observations: ' + e.message);
             return respMsg.error(e.code, e.message);
         }
 
@@ -82,8 +80,7 @@ module.exports = {
      * see this url for more information:
      * http://www.sentilo.io/xwiki/bin/view/ApiDocs.Services.Data/PublishSensorData
      * 
-     * @param inputMessage
-     *            A map object with a list of observations
+     * @param inputMessage A map object with a list of observations
      * @returns A JSON object only if there is an error
      */
     sendObservations : function(inputMessage) {
@@ -92,19 +89,20 @@ module.exports = {
         var requestOptions = utils.mergeOptions(dataServiceOptions, inputMessage);
         requestOptions.path += '/' + requestOptions.provider + '/' + requestOptions.sensor;
 
-        // The input message must contains a correct observatiosn struture
+        // The input message must contains a correct observation struture
         // You can see an entire example in the Sentilo API Doc:
-        // http://www.sentilo.io/xwiki/bin/view/ApiDocs.Services.Data/RetrieveSensorData
+        // https://sentilo.readthedocs.io/en/latest/api_docs/general_model.html#json-format
         if (inputMessage.body && inputMessage.body.observations && inputMessage.body.observations.length > 0) {
             if (typeof inputMessage.body === 'object') {
                 requestOptions.body = JSON.stringify(inputMessage.body);
             }
             try {
-                var response = rest.put(requestOptions);
+                const response = rest.put(requestOptions);
                 logger.debug("Observations has been sent");
                 if (response.body && response.body.length > 0) {
                     return JSON.parse(response.body.toString());
                 }
+                return rest.put(requestOptions);
             } catch (e) {
                 logger.error('Error sending observations: ' + e.message, e.stack);
                 return respMsg.error(e.code, e.message);

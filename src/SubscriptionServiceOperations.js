@@ -51,10 +51,7 @@ module.exports = {
 
         var requestOptions = utils.mergeOptions(subscriptionServiceOptions, inputMessage);
         requestOptions.path = requestOptions.path + '/' + requestOptions.provider + '/' + requestOptions.sensor;
-        requestOptions.headers = {
-                identity_key : requestOptions.providerTokenId
-        }
-        
+
         // The input message must contains a correct order struture
         // You can see an entire example in the Sentilo API Doc:
         // http://www.sentilo.io/xwiki/bin/view/ApiDocs.Services.Subscription/RetrieveSensorOrders
@@ -84,12 +81,9 @@ module.exports = {
     subscribeToAll : function(inputMessage) {
         logger.debug('Adding subscription message to all provider sensors');
 
-        var requestOptions = utils.mergeOptions(subscriptionServiceOptions, inputMessage);
+        const requestOptions = utils.mergeOptions(subscriptionServiceOptions, inputMessage);
         requestOptions.path = requestOptions.path + '/' + requestOptions.provider;
-        requestOptions.headers = {
-                identity_key : requestOptions.providerTokenId
-        }
-        
+
         // The input message must contains a correct order struture
         // You can see an entire example in the Sentilo API Doc:
         // http://www.sentilo.io/xwiki/bin/view/ApiDocs.Services.Subscription/RetrieveSensorOrders
@@ -98,7 +92,7 @@ module.exports = {
                 requestOptions.body = JSON.stringify(inputMessage.body);
             }
             try {
-                var response = rest.put(requestOptions);
+                const response = rest.put(requestOptions);
                 logger.debug("Subscription added to all provider sensors");
                 if (response.body && response.body.length > 0) {
                     return JSON.parse(response.body.toString());

@@ -103,8 +103,8 @@ module.exports = {
             try {
                 var response = rest.post(requestOptions);
                 logger.debug("Sensors registered");
-                if (response.body && response.body.length > 0) {
-                    return JSON.parse(response.body.toString());
+                if (response.statusCode === 200) {
+                    return response;
                 }
             } catch (e) {
                 logger.error('Error retrieving sensors: ' + e.message);
@@ -114,7 +114,6 @@ module.exports = {
             logger.debug('There isn\'t any sensor to register');
         }
 
-        return null;
     },
 
     /**
@@ -167,14 +166,13 @@ module.exports = {
      * information:
      * http://www.sentilo.io/xwiki/bin/view/APIDocs.Services.Alert/CreateAlerts
      * 
-     * @param inputMessage
-     *            A properties object that describes the request options, with
-     *            the list of alerts
+     * @param inputMessage A properties object that describes the request options, with the list of alerts
+     *
      */
     registerAlerts : function(inputMessage) {
         logger.debug('Registering alerts');
 
-        var requestOptions = utils.mergeOptions(catalogServiceOptions, inputMessage);
+        let requestOptions = utils.mergeOptions(catalogServiceOptions, inputMessage);
 
         // The input message must contains a correct alerts struture
         // You can see an entire example in the Sentilo API Doc:
@@ -189,7 +187,7 @@ module.exports = {
             requestOptions.path += '/alert/' + requestOptions.provider;
 
             try {
-                var response = rest.post(requestOptions);
+                const response = rest.post(requestOptions);
                 logger.debug("Alerts registered");
                 if (response.body && response.body.length > 0) {
                     return JSON.parse(response.body.toString());

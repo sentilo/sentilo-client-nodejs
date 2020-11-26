@@ -29,26 +29,16 @@
 var utils = require('./utils/SentiloUtils');
 
 var defaultServicesConfig = {
-	host : 'YOUR_SENTILO_INSTANCE_HOST_IP',
-	port : 'YOUR_SENTILO_INSTANCE_HOST_PORT',
-	headers : {
-		identity_key : 'YOUR_SENTILO_INSTANCE_DEFAULT_IDENTITY_KEY'
-	}
-};
-
-var defaultServicesValues = {
-    providerTokenId : 'YOUR_SENTILO_INSTANCE_IDENTITY_KEY',
-    providerId : 'samples-provider',
-    component : 'sample-component',
-    sensor : 'sample-sensor-nodejs'
+	apiUrl : 'http://localhost:8081',
+    providerId : 'testApp_provider',
+    component : 'TEST_COMPONENT_001',
+    sensor : 'TEST_SENSOR_001'
 };
 
 module.exports = {
 
     getServiceConfigOptions : function() {
-        return utils.mergeOptions(defaultServicesConfig, defaultServicesValues);
-    },
-    defaultServiceConfig : defaultServicesConfig,
-    defaultServiceValues : defaultServicesValues
+        return defaultServicesConfig;
+    }
 
 };

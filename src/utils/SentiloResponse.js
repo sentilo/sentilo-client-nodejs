@@ -42,5 +42,5 @@ module.exports = {
             message : message
         };
         return message;
-    }
+    },
 };

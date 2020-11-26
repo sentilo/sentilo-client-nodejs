@@ -29,35 +29,47 @@
 
 // We need to do synchronous calls to server, so we need to use 'sync-request' library
 // that you can find in this url: https://www.npmjs.com/package/sync-request
-var request = require('sync-request');
+const request = require('sync-request');
 
 module.exports = {
 
     get : function(requestOptions) {
-        if (requestOptions) {
-            var url = 'http://' + requestOptions.host + ':' + requestOptions.port + requestOptions.path;
-            var res = request('GET', url, requestOptions);
+        const url = requestOptions.apiUrl + requestOptions.path;
+        const res =  request('GET', url, requestOptions);
+        if(res.statusCode >= 300 ) {
+            const err = new Error();
+            err.code = res.statusCode;
+            err.message = res.getBody();
+            throw err;
+        } else {
             return res;
         }
-        return null;
     },
 
     post : function(requestOptions) {
-        if (requestOptions) {
-            var url = 'http://' + requestOptions.host + ':' + requestOptions.port + requestOptions.path;
-            var res = request('POST', url, requestOptions);
+        const url = requestOptions.apiUrl + requestOptions.path;
+        var res =  request('POST', url, requestOptions);
+        if(res.statusCode >= 300 ) {
+            const err = new Error();
+            err.code = res.statusCode;
+            err.message = res.getBody();
+            throw err;
+        } else {
             return res;
         }
-        return null;
     },
 
     put : function(requestOptions) {
-        if (requestOptions) {
-            var url = 'http://' + requestOptions.host + ':' + requestOptions.port + requestOptions.path;
-            var res = request('PUT', url, requestOptions);
+        const url = requestOptions.apiUrl + requestOptions.path;
+        var res =  request('PUT', url, requestOptions);
+        if(res.statusCode >= 300 ) {
+            const err = new Error();
+            err.code = res.statusCode;
+            err.message = res.getBody();
+            throw err;
+        } else {
             return res;
         }
-        return null;
     }
 
 };
