@@ -34,7 +34,7 @@ const request = require('sync-request');
 module.exports = {
 
     get : function(requestOptions) {
-        const url = requestOptions.host + requestOptions.path;
+        const url = requestOptions.apiUrl + requestOptions.path;
         const res =  request('GET', url, requestOptions);
         if(res.statusCode >= 300 ) {
             const err = new Error();
@@ -47,7 +47,7 @@ module.exports = {
     },
 
     post : function(requestOptions) {
-        const url = requestOptions.host + requestOptions.path;
+        const url = requestOptions.apiUrl + requestOptions.path;
         var res =  request('POST', url, requestOptions);
         if(res.statusCode >= 300 ) {
             const err = new Error();
@@ -60,7 +60,7 @@ module.exports = {
     },
 
     put : function(requestOptions) {
-        const url = requestOptions.host + requestOptions.path;
+        const url = requestOptions.apiUrl + requestOptions.path;
         var res =  request('PUT', url, requestOptions);
         if(res.statusCode >= 300 ) {
             const err = new Error();
