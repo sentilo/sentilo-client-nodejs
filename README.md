@@ -12,9 +12,9 @@ npm install git+https://github.com/sentilo/sentilo-client-nodejs.git#master
 Alternatively, use this dependency in your package.json:
 
 <pre>
-	"dependencies": {
-		"sentilo-client-nodejs": "git+https://github.com/sentilo/sentilo-client-nodejs.git#master"
-	}
+"dependencies": {
+    "sentilo-client-nodejs": "git+https://github.com/sentilo/sentilo-client-nodejs.git#master"
+}
 </pre>
 
 
@@ -46,7 +46,7 @@ Alternatively, use this dependency in your package.json:
 | `subscribeOrderToAll`   | Subscribes to all sensor orders from a provider   |
 
 
-_Note: .*Operations.js files expose more API services. Also _
+_Note: .*Operations.js files expose more API services. 
 
 You might as well check Sentilo Node-RED library on [Github](https://github.com/sentilo/node-red-contrib-sentilo)
 and on [Node-RED](https://flows.nodered.org/node/node-red-contrib-sentilo) 
