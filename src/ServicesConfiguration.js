@@ -29,11 +29,8 @@
 var utils = require('./utils/SentiloUtils');
 
 var defaultServicesConfig = {
-	host : 'YOUR_SENTILO_INSTANCE_HOST_IP',
-	port : 'YOUR_SENTILO_INSTANCE_HOST_PORT',
-	headers : {
-		identity_key : 'YOUR_SENTILO_INSTANCE_DEFAULT_IDENTITY_KEY'
-	}
+	host : 'localhost',
+	port : '8081'
 };
 
 var defaultServicesValues = {

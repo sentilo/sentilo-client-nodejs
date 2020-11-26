@@ -67,7 +67,7 @@ module.exports = {
                 return JSON.parse(response.body.toString());
             }
         } catch (e) {
-            logger.error('Error retrieving observations: ' + e.message, e.stack);
+            logger.error('Error retrieving observations: ' + e.message);
             return respMsg.error(e.code, e.message);
         }
 

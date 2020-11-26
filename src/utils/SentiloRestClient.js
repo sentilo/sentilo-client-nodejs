@@ -34,27 +34,42 @@ const request = require('sync-request');
 module.exports = {
 
     get : function(requestOptions) {
-        if (requestOptions) {
-            const url = 'http://' + requestOptions.host + ':' + requestOptions.port + requestOptions.path;
-            return request('GET', url, requestOptions);
+        const url = 'http://' + requestOptions.host + ':' + requestOptions.port + requestOptions.path;
+        const res =  request('GET', url, requestOptions);
+        if(res.statusCode >= 300 ) {
+            const err = new Error();
+            err.code = res.statusCode;
+            err.message = res.getBody();
+            throw err;
+        } else {
+            return res;
         }
-        return null;
     },
 
     post : function(requestOptions) {
-        if (requestOptions) {
-            const url = 'http://' + requestOptions.host + ':' + requestOptions.port + requestOptions.path;
-            return request('POST', url, requestOptions);
+        const url = 'http://' + requestOptions.host + ':' + requestOptions.port + requestOptions.path;
+        var res =  request('POST', url, requestOptions);
+        if(res.statusCode >= 300 ) {
+            const err = new Error();
+            err.code = res.statusCode;
+            err.message = res.getBody();
+            throw err;
+        } else {
+            return res;
         }
-        return null;
     },
 
     put : function(requestOptions) {
-        if (requestOptions) {
-            const url = 'http://' + requestOptions.host + ':' + requestOptions.port + requestOptions.path;
-            return request('PUT', url, requestOptions);
+        const url = 'http://' + requestOptions.host + ':' + requestOptions.port + requestOptions.path;
+        var res =  request('PUT', url, requestOptions);
+        if(res.statusCode >= 300 ) {
+            const err = new Error();
+            err.code = res.statusCode;
+            err.message = res.getBody();
+            throw err;
+        } else {
+            return res;
         }
-        return null;
     }
 
 };
