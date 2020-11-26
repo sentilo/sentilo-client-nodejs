@@ -30,7 +30,6 @@ var utils = require('./utils/SentiloUtils');
 
 var defaultServicesConfig = {
 	host : 'localhost',
-	port : '8081',
     providerId : 'testApp_provider',
     component : 'TEST_COMPONENT_001',
     sensor : 'TEST_SENSOR_001'
