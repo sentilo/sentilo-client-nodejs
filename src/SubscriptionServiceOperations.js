@@ -51,10 +51,7 @@ module.exports = {
 
         var requestOptions = utils.mergeOptions(subscriptionServiceOptions, inputMessage);
         requestOptions.path = requestOptions.path + '/' + requestOptions.provider + '/' + requestOptions.sensor;
-        requestOptions.headers = {
-                identity_key : requestOptions.providerTokenId
-        }
-        
+
         // The input message must contains a correct order struture
         // You can see an entire example in the Sentilo API Doc:
         // http://www.sentilo.io/xwiki/bin/view/ApiDocs.Services.Subscription/RetrieveSensorOrders
@@ -86,10 +83,7 @@ module.exports = {
 
         const requestOptions = utils.mergeOptions(subscriptionServiceOptions, inputMessage);
         requestOptions.path = requestOptions.path + '/' + requestOptions.provider;
-        requestOptions.headers = {
-                identity_key : requestOptions.providerTokenId
-        }
-        
+
         // The input message must contains a correct order struture
         // You can see an entire example in the Sentilo API Doc:
         // http://www.sentilo.io/xwiki/bin/view/ApiDocs.Services.Subscription/RetrieveSensorOrders

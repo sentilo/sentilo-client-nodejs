@@ -28,6 +28,7 @@
  */
 module.exports = {
 
+    // the second object can overwrite attributes of the first object
     mergeOptions : function(obj1, obj2) {
         var obj3 = {};
         if (obj1) {

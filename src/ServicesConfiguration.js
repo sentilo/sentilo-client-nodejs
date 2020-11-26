@@ -30,22 +30,16 @@ var utils = require('./utils/SentiloUtils');
 
 var defaultServicesConfig = {
 	host : 'localhost',
-	port : '8081'
-};
-
-var defaultServicesValues = {
-    providerTokenId : 'YOUR_SENTILO_INSTANCE_IDENTITY_KEY',
-    providerId : 'samples-provider',
-    component : 'sample-component',
-    sensor : 'sample-sensor-nodejs'
+	port : '8081',
+    providerId : 'testApp_provider',
+    component : 'TEST_COMPONENT_001',
+    sensor : 'TEST_SENSOR_001'
 };
 
 module.exports = {
 
     getServiceConfigOptions : function() {
-        return utils.mergeOptions(defaultServicesConfig, defaultServicesValues);
-    },
-    defaultServiceConfig : defaultServicesConfig,
-    defaultServiceValues : defaultServicesValues
+        return defaultServicesConfig;
+    }
 
 };
