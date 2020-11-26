@@ -1,99 +1,130 @@
 # Sentilo client library for Node.js
 
-The Sentilo Node.js client library code that brings some Sentilo operations that you can include in your own code.
+The Sentilo Javascript/Node.js client library code that brings some Sentilo operations that you can include in your own code.
 
-## Install
+## Installation
 
-You will need to have installed **Node.js** and **NPM** in your system in order to run your code.
-
-- Deploy the library content into your work directory
-- You'll see an structure like this:
+To install this library via npm, use: 
 <pre>
-/work_directory
-     |
-     |----- /src
-     |        |----- /utils
-     |        |        |----- SentiloLogs.js
-     |        |        |----- SentiloResponse.js
-     |        |        |----- SentiloRestClient.js
-     |        |        '----- SentiloUtils.js
-     |        |
-     |        |----- AlarmServiceOperations.js
-     |        |----- CatalogServiceOperations.js
-     |        |----- DataServiceOperations.js
-     |        |----- ServicesConfiguration.js
-     |        |----- SubscriptionServiceOperations.js
-     |
-     |----- /package.json
-     |----- /README.ME
-     '----- /sentilo.js
-     '----- /sentilo-example.js
-</pre>
-- In a bash command line, run:
-<pre>$ npm update</pre>
-- You'll see a new directory into the working directory. It's the **node_modules** that contains the library external dependencies: 
-<pre>
-/work_directory
-     |
-     |----- /node_modules
-              |----- /restify
-              '----- /sync-request
+npm install git+https://github.com/sentilo/sentilo-client-nodejs.git#master
 </pre>
 
-Afther that, we are ready to start.
+Alternatively, use this dependency in your package.json:
 
-
-## Usage
-
-Before use the library you must configure some parameters that informs where's your Sentilo instance and the necessary credentials.
-
-You must edit the file **/src/ServicesConfiguration.js** to inform them:
 <pre>
-var defaultServicesConfig = {
-	host : 'YOUR-SENTILO-INSTANCE-HOST-IP',
-	port : 'YOUR-SENTILO-INSTANCE-HOST-PORT',
-	headers : {
-		identity-key : 'YOUR-SENTILO-INSTANCE-DEFAULT-IDENTITY-KEY'
+	"dependencies": {
+		"sentilo-client-nodejs": "git+https://github.com/sentilo/sentilo-client-nodejs.git#master"
 	}
-};
-
-var defaultServicesValues = {
-	tokenId : 'YOUR-SENTILO-INSTANCE-IDENTITY-KEY',
-	providerTokenId : 'YOUR-SENTILO-INSTANCE-PROVIDER-IDENTITY-KEY',
-	provider : 'samples-provider',
-	component : 'sample-component-nodejs',
-	sensor : 'sample-sensor-nodejs'
-};
 </pre>
 
-Provide necessary information about your Sentilo instance:
 
-* 'YOUR-SENTILO-INSTANCE-HOST-IP' : your Sentilo's host ip
-* 'YOUR-SENTILO-INSTANCE-HOST-PORT' : your Sentilo's host port
-* 'YOUR-SENTILO-INSTANCE-DEFAULT-IDENTITY-KEY' : your Sentilo's identity key
-* 'YOUR-SENTILO-INSTANCE-IDENTITY-KEY' : the same of above
-* 'YOUR-SENTILO-INSTANCE-PROVIDER-IDENTITY-KEY' : your provider's identity key
+## Sentilo client configuration options
 
-Note that you can leave these parameters without changing and override them with the initialization options in your own code, or you can use the example **sentilo-example.js**:
-<pre>
-// Overridden services options...
-var samplesOptions = {
-	host : 'YOUR-SENTILO-INSTANCE-HOST-IP',
-	port : 'YOUR-SENTILO-INSTANCE-HOST-PORT',
-	headers : {
-		identity-key : 'YOUR-SENTILO-INSTANCE-DEFAULT-IDENTITY-KEY'
-	}
-	tokenId : 'YOUR-SENTILO-INSTANCE-IDENTITY-KEY',
-	providerTokenId : 'YOUR-SENTILO-INSTANCE-PROVIDER-IDENTITY-KEY',
-	
-	...	
+| Option               | Description                                               | Example value           |
+|----------------------|-----------------------------------------------------------|-------------------------|
+| apiUrl               | URL of your Sentilo/Thingtia instance                     | `http://localhost:8081` |
+| headers.identity_key | token of your provider or application                     | `f7a702ad6....`         |
+| provider             | Provider id                                               | `samples-provider`      |
+| sensor               | Sensor Id                                                 | `sample-sensor-nodejs`  |
+| component            | Component Id, Only used in catalog operations.            | `sample-component`      |
+| componentType        | Type of the component. Only used in catalog operations.   | `generic`               |
+| sensorDataType       | Data type of the sensor. Only used in catalog operations. | `TEXT`                  |
+| sensorType           | Ty of the sensor. Only used in catalog operations.        | `status`                |
+| sensorUnit           | Unit of sensor, only used in catalog operations.          | `kW`                    |
+| sensorLocation       | Lat/lon values separated with blank space. Optional       | `41.387015 2.170047`    |
+
+## Sentilo client services
+
+| Method                  | Description                                       |
+|-------------------------|---------------------------------------------------|
+| `existsSensorInCatalog` | Searches a sensor in the catalog. Returns boolean |
+| `createSensor`          | Creates a sensor in catalog.                      |
+| `publishObservations`   | Publishes observations.                           |
+| `createAlerts`          | Creates multiple alerts                           |
+| `publishAlarm`          | Publishes Alarm                                   |
+| `subscribeOrder`        | Subscribes to a order                             |
+| `subscribeOrderToAll`   | Subscribes to all sensor orders from a provider   |
+
+
+_Note: .*Operations.js files expose more API services. Also _
+
+You might as well check Sentilo Node-RED library on [Github](https://github.com/sentilo/node-red-contrib-sentilo)
+and on [Node-RED](https://flows.nodered.org/node/node-red-contrib-sentilo) 
+
+Note that the API documentation is at https://sentilo.readthedocs.io/en/latest/api_docs.html. 
+
+### Example Usage
+
+```javascript
+const sentilo = require('sentilo');
+
+// Initialize sentilo
+const options = {
+    apiUrl : 'http://localhost:8081',
+    headers : {
+           identity_key : 'f7a702ad6b701...'
+    },
+    provider : 'testApp_provider',
+    sensorLocation : '41.387015 2.170047'
 };
+sentilo.init();
 
-// Include some Sentilo operations from the Nodejs client library
-var sentilo = require('./sentilo.js');
+ 
+// Checks if the sensor exists
+const existingSensor = {
+     provider: 'testApp_provider',
+     sensor: 'TestSensor'
+};
+sentilo.existsSensorInCatalog(existingSensor);
+ 
+ 
+// Creates a new sensor
+const newSensor = {
+     sensor: 'TestNewSensor',
+     description: 'TestNewSensorDescription',
+     sensorType: 'anemometer',
+     sensorDataType: 'JSON',
+     component: 'TestGenericSensor',
+     componentType : 'generic',
+     sensorUnit : 'T',
+     sensorLocation : '41.387015 2.170047'
+     
+}
+sentilo.createSensor(newSensor);
+ 
+ 
+// Send observation to the sensor
+const sensorObservation = 'TEST';
+sentilo.publishObservations(sensorObservation, newSensor);
+ 
 
-// Init Sentilo services...
-sentilo.init(samplesOptions);
-</pre>
+// Creates a new alert
+const newAlert = {
+     alerts: [
+         {
+             id: 'TEST_ALERT_001',
+             name: 'TEST_ALERT_001',
+             description: 'External test alert 001',
+             type: 'EXTERNAL'
+         }
+     ]
+}
+sentilo.createAlerts(newAlert);
+ 
 
-Your library is ready to run now.
+// Publish new alarm associated to the alarm that is registered later
+const message = {message: "This is a test alarm over the TEST_ALERT_001"};
+let alarmId = newAlert.alerts[0].id;
+sentilo.publishAlarm(alarmId, message);
+ 
+
+// Example of how to subscribe to a sensor order
+const endpoint = {endpoint:"http://my-test-server/sentilo/sensor/data/endpoint"};
+sentilo.subscribeOrder(endpoint);
+ 
+
+// Example of how to subscribe to all orders
+sentilo.subscribeOrderToAll(endpoint);
+```
+
+You might as well check your example for Raspberry Pi and NodeJS: https://github.com/sentilo/sentilo-client-sample-nodejs
