@@ -11,6 +11,6 @@
 	"main": "src/sentilo.js",
 	"dependencies": 
 	{
-		"sync-request": "*"
+		"sync-request": "6.1.0"
 	}
 }
