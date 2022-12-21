@@ -1,19 +1,22 @@
-# Sentilo client library for Node.js
+# Sentilo client library for Node.js v1.0.0
 
 The Sentilo Javascript/Node.js client library code that brings some Sentilo operations that you can include in your own code.
 
 ## Installation
 
-To install this library via npm, use: 
+To install this library via npm, use:
+ 
 <pre>
-npm install git+https://github.com/sentilo/sentilo-client-nodejs.git#master
+$ npm install sentilo-client-nodejs
 </pre>
+
+See it at: [NPM](https://www.npmjs.com/package/sentilo-client-nodejs)
 
 Alternatively, use this dependency in your package.json:
 
 <pre>
 "dependencies": {
-    "sentilo-client-nodejs": "git+https://github.com/sentilo/sentilo-client-nodejs.git#master"
+    "sentilo-client-nodejs": "^1.0.0"
 }
 </pre>
 
