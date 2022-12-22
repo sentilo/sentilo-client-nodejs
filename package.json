@@ -1,6 +1,6 @@
 {
 	"name": "sentilo-client-nodejs",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Sentilo Nodejs client library",
 	"author": "Sentilo Team (http://www.sentilo.io)",
 	"license": "ISC",

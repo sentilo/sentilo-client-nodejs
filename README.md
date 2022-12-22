@@ -1,4 +1,4 @@
-# Sentilo client library for Node.js v1.0.0
+# Sentilo client library for Node.js v1.0.1
 
 The Sentilo Javascript/Node.js client library code that brings some Sentilo operations that you can include in your own code.
 
@@ -16,7 +16,7 @@ Alternatively, use this dependency in your package.json:
 
 <pre>
 "dependencies": {
-    "sentilo-client-nodejs": "^1.0.0"
+    "sentilo-client-nodejs": "^1.0.1"
 }
 </pre>
 
@@ -131,3 +131,9 @@ sentilo.subscribeOrderToAll(endpoint);
 ```
 
 You might as well check your example for Raspberry Pi and NodeJS: https://github.com/sentilo/sentilo-client-sample-nodejs
+
+
+## Changelog
+
+v.1.0.1 - Fixed libraries versions, updated README.md file
+v.1.0.0 - Initial version
